@@ -59,6 +59,8 @@ set expandtab
 set smarttab
 " Enable automatic indentation
 set smartindent
+" Auto indentation
+set autoindent
 
 " Color setup
 " Enable 24bit color support
@@ -103,7 +105,7 @@ call plug#begin()
     Plug 'Shougo/neosnippet.vim'
     Plug 'Shougo/neosnippet-snippets'
     Plug 'zchee/deoplete-jedi'
-    
+
     " Format plugs
     Plug 'Yggdroot/indentLine'
     Plug 'dense-analysis/ale'
@@ -133,7 +135,6 @@ call plug#begin()
     Plug 'davidhalter/jedi-vim'
     Plug 'ervandew/supertab'
     Plug 'mhinz/vim-signify'
-
     
     " Be depended plug
     Plug 'roxma/nvim-yarp'
@@ -196,6 +197,12 @@ let g:jedi#completions_enabled = 0
 let g:jedi#use_splits_not_buffers = "right"
 
  
+autocmd vimenter * if !argc() | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let NERDTreeShowLineNumbers=1
+let NERDTreeAutoCenter=1
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.git']
 map <silent> tt <plug>NERDTreeTabsToggle<CR>
 
 
@@ -214,6 +221,12 @@ if has("persistent_undo")
 endif
 
 
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
+nmap gE <Plug>(ale_previous_wrap)
+nmap ge <Plug>(ale_next_wrap)<Paste>
 let g:ale_linters = {
 \    'javascript': ['eslint'],
 \    'css': ['stylelint'],
@@ -226,6 +239,9 @@ let g:ale_fixers= {
 \    'css': ['stylelint'],
 \    'python': ['autopep8']
 \}
-
 nmap <silent> tf :ALEFix<CR>
+
+
+let g:Lf_ShortcutF = '<C-p>'
+nmap <silent> <Leader>p :LeaderfFunction<CR>
 
