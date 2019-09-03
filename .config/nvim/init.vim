@@ -35,6 +35,15 @@ set number
 set fileencodings=utf-8
 " Show commands completion in bottom menu
 set wildmenu
+" Show command when yout type
+set showcmd
+
+" Set scroll lines
+set scrolloff=5
+" set ttimeoutlen=0
+" Viminfo recore vim operations
+set viewoptions=cursor,folds,slash,unix
+
 " Enable cursorline
 set cursorline
 " Invisible chars
@@ -61,6 +70,9 @@ set smarttab
 set smartindent
 " Auto indentation
 set autoindent
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
 
 " Color setup
 " Enable 24bit color support
@@ -121,6 +133,8 @@ call plug#begin()
     Plug 'luochen1990/rainbow'
     
     " Tools plugs
+    Plug 'tmhedberg/SimpylFold'
+    Plug 'kshenoy/vim-signature'
     Plug 'junegunn/goyo.vim'
     Plug 'godlygeek/tabular'
     Plug 'tpope/vim-surround'
@@ -153,6 +167,61 @@ nmap <silent> gb :bn<CR>
 nmap <silent> gB :bp<CR>
 inoremap <S-Insert><ESC>:setl paste<CR>gi<C-R>+<ESC>:setl nopaste<CR>gi
 
+let mapleader = " "
+
+" Set nohls when you open nvim
+exec 'nohlsearch'
+" Search
+map <LEADER><CR> :nohlsearch<CR>
+
+" Open the vimrc file anytime
+map <LEADER>rc :e ~/.config/nvim/init.vim<CR>
+
+" Duplicate words
+map <LEADER>dw /\(\<\w\+\>\)\_s*\1
+
+" Folding
+map <silent> <LEADER>o za
+
+" Call figlet
+map tx :r !figlet
+
+" Compile function
+map r :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+  exec "w"
+  if &filetype == 'c'
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
+  elseif &filetype == 'cpp'
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
+  elseif &filetype == 'java'
+    exec "!javac %"
+    exec "!time java %<"
+  elseif &filetype == 'sh'
+    :!time bash %
+  elseif &filetype == 'python'
+    set splitright
+    :vsp
+    :vertical resize-20
+    :term python3 %
+  elseif &filetype == 'html'
+    exec "!chromium % &"
+  elseif &filetype == 'markdown'
+    exec "MarkdownPreview"
+  endif
+endfunc
+
+map R :call CompileBuildrrr()<CR>
+func! CompileBuildrrr()
+  exec "w"
+  if &filetype == 'vim'
+    exec "source $MYVIMRC"
+  elseif &filetype == 'markdown'
+    exec "echo"
+  endif
+endfunc
 
 " Plug settings
 "
@@ -207,10 +276,11 @@ map <silent> tt <plug>NERDTreeTabsToggle<CR>
 
 
 map <silent> tb :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
 
 
 nmap <silent> <C-m> <Plug>NERDCommenterToggle
-nmap <silent> <C-m> <Plug>NERDCommenterToggle
+vmap <silent> <C-m> <Plug>NERDCommenterToggle
 let g:NERDSpaceDelims = 1
 
 
@@ -237,11 +307,14 @@ let g:ale_linters_ignore = {'python': ['pylint']}
 let g:ale_fixers= {
 \    'javascript': ['eslint'],
 \    'css': ['stylelint'],
-\    'python': ['autopep8']
+\    'python': ['autopep8', 'yapf']
 \}
 nmap <silent> tf :ALEFix<CR>
 
 
 let g:Lf_ShortcutF = '<C-p>'
-nmap <silent> <Leader>p :LeaderfFunction<CR>
+nmap <silent> <Leader>p :Leaderf function<CR>
+nmap <silent> <Leader>s :Leaderf rg<CR>
+nmap <silent> <Leader>l :Leaderf line<CR>
+nmap <silent> <Leader>w :Leaderf tag<CR>
 
