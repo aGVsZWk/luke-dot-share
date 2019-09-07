@@ -1,2 +1,7 @@
 var:
   last_build_time: 1566739709
+  previously_selected_schema: luna_pinyin
+  schema_access_time:
+    luna_pinyin: 1567845072
+    luna_pinyin_fluency: 1567840916
+    terra_pinyin: 1567844799
