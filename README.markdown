@@ -277,4 +277,10 @@ sudo ln -s /usr/local/python/bin/sslocal /usr/bin/sslocal
 > https://github.com/AnthonyDiGirolamo/els
 
 ## 安装nvim
-pass
+pass   
+
+## HHKB键盘DIP开关配置
+> https://www.chenshaowen.com/blog/how-to-configure-the-hhkb-keyboard.html    
+
+关掉126，开启345，将i3的Win键改成了Alt
+HHKB按`Fn+Q`可进入蓝牙配对模式，也可按电源键三秒进入
