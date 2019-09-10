@@ -9,7 +9,7 @@ endif
 
 " set for clipboard
 let &t_ut=''
-set autochdir
+" set autochdir
 
 " editor behavior
 " Plain text automatic line break
@@ -118,6 +118,7 @@ call plug#begin()
     Plug 'Shougo/neosnippet-snippets'
     Plug 'zchee/deoplete-jedi'
 
+
     " Format plugs
     Plug 'Yggdroot/indentLine'
     Plug 'dense-analysis/ale'
@@ -139,6 +140,7 @@ call plug#begin()
     Plug 'godlygeek/tabular'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
+    Plug 'easymotion/vim-easymotion'
     Plug 'majutsushi/tagbar'
     Plug 'scrooloose/nerdtree'
     Plug 'scrooloose/nerdcommenter'
@@ -149,6 +151,10 @@ call plug#begin()
     Plug 'davidhalter/jedi-vim'
     Plug 'ervandew/supertab'
     Plug 'mhinz/vim-signify'
+    
+    " Front plugs
+    Plug 'mattn/emmet-vim'
+
     
     " Be depended plug
     Plug 'roxma/nvim-yarp'
@@ -166,6 +172,14 @@ highlight ExtraWhitespace guibg=#E06C75
 nmap <silent> gb :bn<CR>
 nmap <silent> gB :bp<CR>
 inoremap <S-Insert><ESC>:setl paste<CR>gi<C-R>+<ESC>:setl nopaste<CR>gi
+nnoremap <C-w>i <C-w>s
+nnoremap <C-w>s <C-w>v
+" Resize splits with arrow keys
+map <up> :res +5<CR>
+map <down> :res -5<CR>
+map <left> :vertical resize-5<CR>
+map <right> :vertical resize+5<CR>
+
 
 let mapleader = " "
 
@@ -175,10 +189,10 @@ exec 'nohlsearch'
 map <LEADER><CR> :nohlsearch<CR>
 
 " Open the vimrc file anytime
-map <LEADER>rc :e ~/.config/nvim/init.vim<CR>
+map tr :e ~/.config/nvim/init.vim<CR>
 
 " Duplicate words
-map <LEADER>dw /\(\<\w\+\>\)\_s*\1
+" map <LEADER>dw /\(\<\w\+\>\)\_s*\1
 
 " Folding
 map <silent> <LEADER>o za
@@ -187,7 +201,7 @@ map <silent> <LEADER>o za
 map tx :r !figlet
 
 " Compile function
-map r :call CompileRunGcc()<CR>
+map rr :call CompileRunGcc()<CR>
 func! CompileRunGcc()
   exec "w"
   if &filetype == 'c'
@@ -232,6 +246,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'one'
 
+let g:colorizer_nomap = 1
 
 let g:SuperTabDefaultCompletionType="context"
 let g:SuperTabDefaultCompletionType = "<c-n><c-p>"
@@ -246,6 +261,8 @@ call deoplete#custom#source('_',
             \ 'disabled_syntaxes', ['String']
             \ )
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+let g:user_emmet_leader_key = '<C-k>'
 
 
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -264,25 +281,27 @@ endif
 
 let g:jedi#completions_enabled = 0
 let g:jedi#use_splits_not_buffers = "right"
-
+let g:jedi#use_tag_stack = 0
+let g:jedi#goto_stubs_command = '<A-A>'
  
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let NERDTreeShowLineNumbers=1
-let NERDTreeAutoCenter=1
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.git']
+let NERDTreeShowLineNumbers = 1
+let NERDTreeAutoCenter = 1
+let NERDTreeShowHidden = 1
+let NERDTreeIgnore = ['\.pyc','\~$','\.swp','\.git', '__pycache__']
 map <silent> tt <plug>NERDTreeTabsToggle<CR>
+" Solve vim-signature conflict with nerdtree
+let NERDTreeMapMenu = 'M'
+" Solve unuse keys as A-A, for set notimeout
+let NERDTreeMapOpenExpl = '<A-A>'
+let NERDTreeMapCWD = '<A-A>'
 
 
 map <silent> tb :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
-
-nmap <silent> <C-m> <Plug>NERDCommenterToggle
-vmap <silent> <C-m> <Plug>NERDCommenterToggle
 let g:NERDSpaceDelims = 1
-
 
 map <silent> tu :UndotreeToggle<CR>
 if has("persistent_undo")
@@ -316,5 +335,5 @@ let g:Lf_ShortcutF = '<C-p>'
 nmap <silent> <Leader>p :Leaderf function<CR>
 nmap <silent> <Leader>s :Leaderf rg<CR>
 nmap <silent> <Leader>l :Leaderf line<CR>
-nmap <silent> <Leader>w :Leaderf tag<CR>
+" nmap <silent> <Leader>w :Leaderf tag<CR>
 

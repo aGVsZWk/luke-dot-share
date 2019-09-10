@@ -73,6 +73,10 @@ ping一下，终于ok了！！！
 `~/.xinitrc`结尾添加: `exec i3`    
 安装字体，否则可能无法正常显示: `sudo pacman -S ttf-font-awesome wqy-bitmapfont wqy-microhei wqy-zenhei nerd-fonts-complete`  我nerd-fonts-complete没找到    
 
+`mod+w`: 切换成折叠式窗口
+`mod+e`: 取消折叠式/水平/竖直旋转
+
+
 ### 启动    
 `startx`  成功！！！    
 
@@ -187,12 +191,14 @@ ascii_composer/switch_key:
 ```
 **一个大坑，把shift切换输入法关掉**
 ![](arch调教/Screenshot_07-09-19-16:34:58.png)    
+![](arch调教/Screenshot_07-09-19-22:05:21.png)    
 
 
 rime进行输入方案的选择: `ctrl+\``
 
-
-
+查看剪切版内容　`ctrl+;`
+切换全角和半角: `Shift+Space`
+中英文标点切换: `ctrl+.` 这个基本上不会用
 
 ## 安装chrome浏览器
 pass
