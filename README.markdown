@@ -307,3 +307,7 @@ c,l,i,o,g,Esc
 ### 安装pdf阅读器
 `sudo pacman -S foxitreader`
 这个很简单
+
+## 安装office
+`sudo pacman -S wps-office`
+
