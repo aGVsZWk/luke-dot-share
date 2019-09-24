@@ -180,7 +180,7 @@ export XMODIFIERS=@im=fcitx
 在switches配置段的name:simplication下增加一行：`reset:1`    
 
 修改按shift上屏: `vi ~/.config/fcitx/rime/build/default.yml` 修改配置段
-```
+```json
 ascii_composer/good_old_caps_lock: true
 ascii_composer/switch_key:
   Caps_Lock: noop
@@ -189,12 +189,13 @@ ascii_composer/switch_key:
   Control_L: clear
   Control_R: commit_text
 ```
+
 **一个大坑，把shift切换输入法关掉**
 ![](arch调教/Screenshot_07-09-19-16:34:58.png)    
 ![](arch调教/Screenshot_07-09-19-22:05:21.png)    
 
 
-rime进行输入方案的选择: `ctrl+\``
+rime进行输入方案的选择: `ctrl+\`
 
 查看剪切版内容　`ctrl+;`
 切换全角和半角: `Shift+Space`
@@ -209,7 +210,7 @@ ranger显示隐藏文件: `zh`
 
 
 ## 安装图片浏览工具feh
-`sudo pacman -S feh`
+`sudo pacman -S feh`   
 
 ## 配置桌面背景图片
 在i3的启动文件中进行配置    
@@ -290,3 +291,19 @@ pass
 
 关掉126，开启345，将i3的Win键改成了Alt
 HHKB按`Fn+Q`可进入蓝牙配对模式，也可按电源键三秒进入
+
+## 安装epub阅读器
+`sudo pacman -S fbreader`
+启动: `FBReader`
+使用说明: 和vim类似
+```
+j,k
+f
+<C-f>,<C-b>
+c,l,i,o,g,Esc
+```
+可在右键设置里设置颜色，快捷键，字体等等。
+
+### 安装pdf阅读器
+`sudo pacman -S foxitreader`
+这个很简单
