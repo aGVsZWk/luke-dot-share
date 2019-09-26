@@ -1,0 +1,6 @@
+`xmodmap -pke > ~/.xmodconfig`: 将键盘配置文件导出到家目录
+`sudo pacman -S xorg`: 安装xorg
+`xev`: 弹出一个空白窗口，在此窗口按键，会在旁边终端显示
+然后就能知道哪个按键是哪个了，修改.xmodconfig就ok了
+
+
