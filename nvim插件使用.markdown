@@ -12,37 +12,57 @@
 需要安装`pip3 install neovim`，neovim中包含依赖插件pynvim等等。
 
 ## neosnippet
-`<C-K>`或`<Tab>`进行代码片段展开
+`<C-K>`或`<Tab>`进行代码片段展开   
 
 ## ale
 安装flake8，autopep8和yamf，其中flake8会依赖pyline  
 配置flake8忽略错误内容，更改501长度报错范围参考下图，将配置文件放在项目根目录中！！！  
 >> todo 上图      
-`tf`: 自动格式化代码
+`tf`: 自动格式化代码   
 
 
 ## Leaderf
-模糊搜索: 先安装`sudo pacman -S ripgrep`，然后vim中`:Leaderf rg`，然后输入要搜索的内容，已经设置成了快捷键 `<Leader>s`，现在和jedi的快捷键冲突
+模糊搜索: 先安装`sudo pacman -S ripgrep`，然后vim中`:Leaderf rg`，然后输入要搜索的内容，已经设置成了快捷键 `<Leader>s`，现在和jedi的快捷键冲突    
 
-如果要设置忽略文件，在项目目录的.ignore中设置，语法和git一样，它也自动过滤的.gitignore中的名单。
+如果要设置忽略文件，在项目目录的.ignore中设置，语法和git一样，它也自动过滤的.gitignore中的名单。   
 
 
-函数搜索：  `<Leader>p`   `Leaderf function`
+函数搜索：  `<Leader>p`   `Leaderf function`   
 文件搜索: `<C-p>`  `:Leaderf file`
-搜索好了之后按`<Tab>`切换窗口，按F1查看帮助，再次按Tab可切回搜索框    
-行内搜索： `<Leader>l`  `:Leaderf line`
-tag搜索: `<leader>w`  `:Leaderf tag`
+搜索好了之后按`<Tab>`切换窗口，按F1查看帮助，再次按Tab可切回搜索框     
+行内搜索： `<Leader>l`  `:Leaderf line`    
+tag搜索: `<leader>w`  `:Leaderf tag`    
 
+## tabular
+按指定要求对齐。   
+比如指定按=对齐: `Tabularize /=`     
+上面命令会按/之后的内容对其   
+
+## vim-easy-motion
+`<Leader><Leader>w`: w的加强版   
+`<Leader><Leader>e`: e的加强版   
+`<Leader><Leader>b`: b的加强版   
+`<Leader><Leader>j`: j的加强版   
+`<Leader><Leader>k`: k的加强版   
+`<Leader><Leader>f任意按键`: f的加强版   
+
+
+## vim-multiple
+多光标插件。    
+`<C-n>`: 选中当前光标内容，开启多个光标模式，跳到下一行。
+`<C-p>`: 跳到上一行。
+`<C-x>`: 跳过选中当前单词。
 
 
 ## nerdcomment
-`<Space>cc`: 注释代码
-`<Space>cu`: 取消代码
-`<Space>ca`: 切换注释风格
-`<Space>c<Space>`: 注释/取消注释
+`<Space>cc`: 注释代码   
+`<Space>cu`: 取消代码   
+`<Space>ca`: 切换注释风格   
+`<Space>c<Space>`: 注释/取消注释    
 
 ## nerdtree
 `q` 退出nerdtree窗口  
+
 
 ### 操作文件
 `o`: 打开文件并跳转  
