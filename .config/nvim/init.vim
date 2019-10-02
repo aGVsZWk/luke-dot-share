@@ -81,9 +81,12 @@ set termguicolors
 let g:python3_host_prog = "/usr/local/bin/python3"
 " set completeopt-=preview
 set completeopt=noinsert,menuone,noselect
+" jedi
+autocmd FileType python setlocal completeopt-=preview
+
 "
 set notimeout
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
 set splitbelow
 
 
@@ -97,6 +100,7 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 " C
 autocmd Filetype c setlocal ts=8 sts=8 sw=8 noet
 
+" Cursor shape
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -132,9 +136,11 @@ call plug#begin()
     Plug 'vim-airline/vim-airline-themes'
     Plug 'lilydjwg/colorizer'
     Plug 'luochen1990/rainbow'
+    Plug 'ryanoasis/vim-devicons'
     
     " Tools plugs
     Plug 'tmhedberg/SimpylFold'
+    Plug 'terryma/vim-multiple-cursors'
     Plug 'kshenoy/vim-signature'
     Plug 'junegunn/goyo.vim'
     Plug 'godlygeek/tabular'
@@ -148,13 +154,17 @@ call plug#begin()
     Plug 'jistr/vim-nerdtree-tabs'
     Plug 'mbbill/undotree'
     Plug 'gregsexton/matchtag'
-    Plug 'davidhalter/jedi-vim'
     Plug 'ervandew/supertab'
     Plug 'mhinz/vim-signify'
+    Plug 'Raimondi/delimitMate'
     
     " Front plugs
     Plug 'mattn/emmet-vim'
 
+    "python
+    Plug 'davidhalter/jedi-vim'
+    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    Plug 'tweekmonster/braceless.vim'
     
     " Be depended plug
     Plug 'roxma/nvim-yarp'
@@ -188,20 +198,23 @@ exec 'nohlsearch'
 " Search
 map <LEADER><CR> :nohlsearch<CR>
 
-" Open the vimrc file anytime
-map tr :e ~/.config/nvim/init.vim<CR>
-
 " Duplicate words
 " map <LEADER>dw /\(\<\w\+\>\)\_s*\1
 
 " Folding
 map <silent> <LEADER>o za
 
+" Python-synatx
+let g:python_highlight_all = 1
+
 " Call figlet
 map tx :r !figlet
 
+" Open the vimrc file anytime
+map <Leader><Leader>rc :e ~/.config/nvim/init.vim<CR>
+
 " Compile function
-map rr :call CompileRunGcc()<CR>
+map <Leader><Leader>rr :call CompileRunGcc()<CR>
 func! CompileRunGcc()
   exec "w"
   if &filetype == 'c'
@@ -227,7 +240,9 @@ func! CompileRunGcc()
   endif
 endfunc
 
-map R :call CompileBuildrrr()<CR>
+
+
+map <Leader><Leader>R :call CompileBuildrrr()<CR>
 func! CompileBuildrrr()
   exec "w"
   if &filetype == 'vim'
@@ -237,6 +252,11 @@ func! CompileBuildrrr()
   endif
 endfunc
 
+" Opening a terminal window
+map <Leader><Leader>rt :set splitbelow<CR>:sp<CR>:term<CR>
+
+" Press space twice to jump to the next '<++>' and edit it
+map <Leader><Leader><Leader> <Esc>/<++><CR>:nohlsearch<CR>c4l
 " Plug settings
 "
 let g:airline#extensions#tabline#enabled = 1
@@ -261,8 +281,10 @@ call deoplete#custom#source('_',
             \ 'disabled_syntaxes', ['String']
             \ )
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:deoplete#ignore_sources = {}
+let g:deoplete#ignore_sources._ = ['buffer', 'arround']
 
-let g:user_emmet_leader_key = '<C-k>'
+let g:user_emmet_leader_key = '<C-j>'
 
 
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -283,7 +305,7 @@ let g:jedi#completions_enabled = 0
 let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#use_tag_stack = 0
 let g:jedi#goto_stubs_command = '<A-A>'
- 
+
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let NERDTreeShowLineNumbers = 1
@@ -332,8 +354,21 @@ nmap <silent> tf :ALEFix<CR>
 
 
 let g:Lf_ShortcutF = '<C-p>'
-nmap <silent> <Leader>p :Leaderf function<CR>
+nmap <silent> <Leader>f :Leaderf function<CR>
 nmap <silent> <Leader>s :Leaderf rg<CR>
 nmap <silent> <Leader>l :Leaderf line<CR>
 " nmap <silent> <Leader>w :Leaderf tag<CR>
 
+autocmd FileType python BracelessEnable +indent +fold
+
+let g:semshi#active = 1
+let g:semshi#no_default_builtin_highlight = 0
+let g:semshi#simplify_markup = 0
+let g:semshi#error_sign = 0
+let g:semshi#tolerate_syntax_errors = 0
+
+let g:delimitMate_autoclose = 1
+let g:delimitMate_smart_quotes = 1
+let g:delimitMate_smart_matchpairs = 1
+let g:delimitMate_balance_matchpairs = 1
+inoremap <expr> <C-l> delimitMate#JumpAny()
