@@ -126,7 +126,7 @@ Server = https://mirrirs.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 ## 安装polybar    
 `sudo pacman -S polybar`    
 安装polybar的时候，下面会列出一些依赖包，有你已经安装的和未安装的，尽可能装上。    
-
+`sudo pacman -S cmake`
 生成配置文件： `install -Dm644 /usr/share/doc/polybar/config $HOME/.config/polybar/config`    
 去查看配置文件： `~/.config/polybar/config`    
 编写launch.sh，去看github上的wiki    
