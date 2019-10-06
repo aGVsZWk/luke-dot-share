@@ -284,7 +284,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:deoplete#ignore_sources = {}
 let g:deoplete#ignore_sources._ = ['buffer', 'arround']
 
-let g:user_emmet_leader_key = '<C-j>'
+let g:user_emmet_leader_key = '<C-l>'
 
 
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -371,4 +371,4 @@ let g:delimitMate_autoclose = 1
 let g:delimitMate_smart_quotes = 1
 let g:delimitMate_smart_matchpairs = 1
 let g:delimitMate_balance_matchpairs = 1
-inoremap <expr> <C-l> delimitMate#JumpAny()
+inoremap <expr> <C-j> delimitMate#JumpAny()
